@@ -1,0 +1,65 @@
+<div class="container" align="right">
+<h4>Visa: 4111 1111 1111 1111</h4>
+<h4> Mastercard: 5399 9999 9999 9999</h4>
+</div>
+<div class="container" ng-show="showSelect">
+    <div class="container" align="center">
+      <h1>How to pay?</h1>
+    </div>
+    <div class="container" align="center">
+        <div class="row" ng-show="showTree">
+            <img src="img/items/tree.png" height="100px"></img><br>
+            <h3 class="text-transform-upr icon-title wow fadeInUp" ><b>tree</b></h3>
+            <p class="icon-content wow fadeInUp" > <b>20,00€ </b></p>
+        </div> 
+        <div class="row" ng-show="showGlass">
+            <img src="img/items/glass.png" height="100px"></img><br>
+            <h3 class="text-transform-upr icon-title wow fadeInUp" ><b>1L Water</b></h3>
+            <p class="icon-content wow fadeInUp" > <b>2,00€ </b></p>
+        </div> 
+        <div class="row" ng-show="showSausage">
+            <img src="img/items/sausage.png" height="100px"></img><br>
+            <h3 class="text-transform-upr icon-title wow fadeInUp" ><b>sausage</b></h3>
+            <p class="icon-content wow fadeInUp" > <b>1,99€ </b></p>
+        </div> 
+        <div class="row" ng-show="showBurger">
+            <img src="img/items/sausage.png" height="100px"></img><br>
+            <h3 class="text-transform-upr icon-title wow fadeInUp" ><b>burger</b></h3>
+            <p class="icon-content wow fadeInUp" > <b>5,99€ </b></p>
+        </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-4" align="center">
+        <h3><b>Modal Widget</b></h3>
+        <button type="button" class="btn btn-light" ng-click="initModalExample()">
+            <img src="img/Widget.png" height="250px" alt="" ng-click="initModalExample()">
+        </button>
+      </div>
+      <div class="col-md-4" align="center" ng-click="initInlineExample()">
+        <h3><b>Inline Widget</b></h3>
+        <button type="button" class="btn btn-light">
+            <img src="img/WidgetInline.png" height="250px" alt="">
+        </button>
+      </div>
+      <div class="col-md-4" align="center">
+        <h3><b>Widget as a Bridge</b></h3>
+        <button type="button" class="btn btn-light" ng-click="initInlinePiExample()">
+            <img src="img/WidgetBridge.png" height="250px" alt="">
+        </button>
+      </div>
+    </div>
+</div>
+
+<div class="panel" ng-show="showContainer" align="center">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">    
+        <div id="widgetcontainer" style="height:600px;" width="100%" align="center"></div>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,286 @@
+<div class="container"  id="widgetconfig" ng-controller='docsWidgetExampleCtrl'>
+ 	<div>
+		<ul class="nav nav-tabs">
+			<li class="active">
+	      <a data-toggle="tab" ng-click="changeExampleType(examplesList.modalExample)" type="button">Modal Widget</a>
+			</li>
+			<li>
+	      <a data-toggle="tab" ng-click="changeExampleType(examplesList.inlineExample)" type="button">Inline Widget</a>
+			</li>
+			<li>
+				<a data-toggle="tab" ng-click="changeExampleType(examplesList.inlinePiExample)" type="button">Widget as a Bridge</a>
+			</li>
+			<li>
+				<a data-toggle="tab" ng-click="changeExampleType(examplesList.testPIExample)" type="button">Test Your PI</a>
+			</li>
+		</ul>
+		<div class="panel" ng-if="currExample!=examplesList.testPIExample">
+			<div class="panel-heading">
+				<h3 class="panel-title">Init widget</h3>
+			</div>
+			<div class="panel-body">
+				<form ng-init="createOrder()">
+					<div class="form-group">
+						<label class="col-md-12" class="control-label" for="merchantId">MerchantID</label>
+						<input id="merchantId" class="form-control" type="text" ng-model="merchantId" />
+					</div>
+					<div class="form-group" ng-if="currExample!=examplesList.inlinePiExample">
+						<label class="col-md-12" for="orderId">OrderID</label>
+						<input id="orderId" class="form-control" type="text" ng-model="orderId"/>
+					</div>
+					<div class="form-group">
+						<label class="col-md-12" for="language">Language</label>
+						<input id="language" class="form-control" type="text" ng-model="optionalParameters.language"/>
+					</div>
+					<div class="form-group">
+						<div class="col-md-12">
+							<label class="col-md-12">Products
+								<input type="checkbox" ng-model="allSelected" ng-change="onAllProductsSelect()"
+												ng-true-value="true" ng-false-value="false">
+								<span>All</span>
+							</label>
+							<hr />
+							<div>
+								<label ng-repeat="product in productsArray" class="col-md-6">
+					        <input type="checkbox" id="product.type" ng-model="product.enabled" ng-disabled="allSelected"
+													ng-change="onProductSelect(product)">
+					        <span>{{product.label}}</span>
+					      </label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" ng-if="currExample!=examplesList.modalExample">
+						<label class="col-md-12" for="layoutInline">Layout</label>
+						<hr />
+						<div>
+							<label ng-repeat="layoutInline in layoutsInline" class="col-md-6">
+				        <input type="radio" name="layoutInline" ng-model="optionalParameters.layout" ng-value="layoutInline.type">
+				        <span>{{layoutInline.label}}</span>
+				      </label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-12" for="exampleTheme">Color theme</label>
+						<hr />
+						<div>
+							<label ng-repeat="theme in exampleThemes" class="col-md-6">
+				        <input type="radio" name="theme" ng-model="optionalParameters.colorTheme" ng-value="theme.type">
+				        <span>{{theme.label}}</span>
+				      </label>
+						</div>
+					</div>
+
+					<div class="form-group" ng-if="currExample==examplesList.inlineExample || currExample==examplesList.inlinePiExample">
+						<label class="col-md-12" for="exampleTheme">Other options</label>
+						<hr />
+						<div class="col-md-6" ng-if="currExample==examplesList.inlineExample">
+							<label>
+								<input type="checkbox" name="redirectUser" ng-model="optionalParameters.redirectUser">
+								<span> <b>Redirect user</b></span>
+							</label>
+						</div>
+						<div class="col-md-6">
+							<label class="col-md-12">
+								<input type="checkbox" name="hideTitleIcons" ng-model="optionalParameters.hideTitleIcons" >
+								<span> <b>Hide Title Icons</b></span>
+							</label>
+							<label class="col-md-12" for="hidePayButton">
+								<input type="checkbox" name="hidePayButton" ng-model="optionalParameters.hidePayButton">
+								<span><b>Hide Pay Button</b></span>
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-12" for="exampleTheme">Optional parameters:</label>
+						<hr />
+
+						<div class="col-md-6">
+							<label>
+								<span> <b>Credit card:</b></span>
+							</label>
+						</div>
+						<div class="col-md-6">
+							<label class="col-md-12">
+								<input id="cardHolder" type="checkbox" ng-model="optionalParameters.optionalFields.creditCard.cardHolder">
+								<span>Card holder</span>
+							</label>
+						</div>
+
+						<div class="col-md-6">
+							<label>
+								<span> <b>Sepa:</b></span>
+							</label>
+						</div>
+						<div class="col-md-6">
+							<hr />
+							<label class="col-md-12">
+								<input id="optionalSepaАccountHolder" type="checkbox"
+												ng-model="optionalParameters.optionalFields.sepa.accountHolder">
+								<span>Account holder</span>
+							</label>
+							<label class="col-md-12">
+								<input id="optionalSepaBIC" type="checkbox"
+												ng-model="optionalParameters.optionalFields.sepa.bic">
+								<span>BIC</span>
+							</label>
+							<label class="col-md-12">
+								<input id="optionalSepaBankName" type="checkbox"
+												ng-model="optionalParameters.optionalFields.sepa.bankName">
+								<span>Bank Name</span>
+							</label>
+						</div>
+
+						<div ng-if="currExample!=examplesList.inlinePiExample">
+							<div class="col-md-6">
+								<label>
+									<span> <b>Ratepay Direct Debit:</b></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<hr />
+								<label class="col-md-12">
+									<input id="optionalRatePayDDАccountHolder" type="checkbox"
+													ng-model="optionalParameters.optionalFields.ratepayDirectDebit.accountHolder">
+									<label>Account holder</label>
+								</label>
+								<label class="col-md-12">
+									<input id="optionalRatePayDDBIC" type="checkbox"
+													ng-model="optionalParameters.optionalFields.ratepayDirectDebit.bic">
+									<label>BIC</label>
+								</label>
+							</div>
+
+							<div class="col-md-6">
+								<label>
+									<span> <b>Ratepay Installment:</b></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<hr />
+								<label class="col-md-12">
+									<input id="optionalRatePayInstАccountHolder" type="checkbox"
+													ng-model="optionalParameters.optionalFields.ratepayInstallment.accountHolder">
+									<label>Account holder</label>
+								</label>
+								<label class="col-md-12">
+									<input id="optionalRatePayInstBIC" type="checkbox"
+													ng-model="optionalParameters.optionalFields.ratepayInstallment.bic">
+									<label>BIC</label>
+								</label>
+							</div>
+
+							<div class="col-md-6">
+								<label>
+									<span> <b>Risk settings:</b></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<hr />
+								<label class="col-md-12" for="deviceIdent">
+									<input id="deviceIdent" type="checkbox" name="deviceIdent"
+													ng-model="optionalParameters.deviceIdent">
+									<label>Device Ident</label>
+								</label>
+							</div>
+
+							<div class="col-md-6">
+								<label>
+									<span> <b>Paypal:</b></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<hr />
+								<label class="col-md-12" for="paypalRecurringBillingAgreement">
+									<input id="paypalRecurringBillingAgreement" type="checkbox" name="paypalRecurringBillingAgreement"
+													ng-model="optionalParameters.paypalRecurringBillingAgreement">
+									<label>Recurring Billing Agreement</label>
+								</label>
+							</div>
+
+						</div>
+						<div ng-if="currExample!=examplesList.modalExample">
+							<div class="col-md-6">
+								<label>
+									<span> <b>Final result:</b></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<hr />
+								<label class="col-md-12" for="skipFinalResultView">
+									<input id="skipFinalResultView" type="checkbox" name="skipFinalResultView"
+													ng-model="optionalParameters.skipFinalResultView">
+									<label>Skip final result view</label>
+								</label>
+							</div>
+						</div>
+
+					</div>
+					<div class="form-group" >
+						<button class="btn btn-block primary" type="button" ng-click="initExample()">
+							<span>INIT</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="panel" ng-if="currExample==examplesList.testPIExample">
+			<div class="panel-heading">
+				<h3 class="panel-title">Test PI</h3>
+			</div>
+			<div class="panel-body">
+				<form>
+					<div class="form-group">
+						<label class="col-md-12" class="control-label" for="merchantId">MerchantID</label>
+						<input id="merchantId" class="form-control" type="text" ng-model="merchantId" />
+					</div>
+					<div class="form-group">
+						<label class="col-md-12" for="payPi">PaymentInstrumendID</label>
+						<input id="payPi" class="form-control" type="text"  ng-model="paymentInstrumentID" />
+					</div>
+					<div class="form-group" >
+						<button class="btn btn-block primary" type="button" ng-click="payWithPi()">
+							<span>TEST</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="panel" ng-show="showContainer">
+		<div class="panel-heading">
+			<h3 class="panel-title">Widget Events</h3>
+		</div>
+		<div class="panel-body" >
+			<div id="widgetcontainerevents" style="height:80px;">
+				<div class="col-md-6">
+					<button class="btn primary btn-block" type="button" ng-click="addListener()"><span>Add listener</span></button>
+					<button class="btn primary btn-block" type="button" ng-click="removeListener()"><span>Remove listener</span></button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn primary btn-block" type="button" ng-click="validateExample()"><span>Validate</span></button>
+					<button class="btn primary btn-block" type="button" ng-click="payExample()"><span>PAY</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">Widget Results</h3>
+		</div>
+		<div class="panel-body results">Results:
+			<p id="widgetResults" class="alert alert-success" ng-model="widgetResults"></p>
+		</div>
+		<div class="panel-body results">Error:
+			<p id="widgetError" class="alert alert-danger" ng-model="widgetError"></p>
+		</div>
+	</div>
+	<div class="panel" ng-show="showContainer">
+		<div class="panel-heading">
+			<h3 class="panel-title">Widget</h3>
+		</div>
+		<div class="panel-body">
+			<div id="widgetcontainer" style="height:600px;"></div>
+		</div>
+	</div>
+</div>
