@@ -1,0 +1,71 @@
+<div class="container"><br>
+  <h1 class="text-center"><a href="/modalstepone"><button class="btn btn-info pull-left"> < Previous Step</button><strong style="color:#DA4405;">Step 2/4:</strong> Create an JSON Order <a href="/modalstepthree"> <button class="btn btn-info pull-right">Next Step ></button></a></h1><br>
+  <p>To perform a request a order hast to be created. You can edit the fields below and the sample JSON will be generated on the right box.</p><br>
+	<div class="col-md-7">
+    <h2>Mandatory Fields</h1>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Parameter</th>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>initialAmount</td>
+                <td>Amount as smallest currency unit e.g 100€ will be result in amount = 10000</td>
+                <td><input ng-model="initialAmount"></input></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>currency</td>
+                <td>Currency code according to https://en.wikipedia.org/wiki/ISO_4217</td>
+                <td><input ng-model="currency"></input></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>successUrl</td>
+                <td>In case of a successful order the customer will be redirected to the given URL.</td>
+                <td><input ng-model="successUrl"></input></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>failureUrl</td>
+                <td>In case of a failed order the customer will be redirected to the given URL.</td>
+                <td><input ng-model="failureUrl"></input></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>cancelUrl</td>
+                <td>In case of a cancellation by the customer, the customer will be redirected to the given URL.</td>
+                <td><input ng-model="cancelUrl"></input></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>transactionType</td>
+                <td>The type of the underlying Transaction</td>
+                <td>Preauth<input type="radio" ng-model="transactionType" value="PREAUTH"> Debit<input type="radio" ng-model="transactionType" value="DEBIT"></input></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+	<div class="col-md-5">
+		<h2>Your Order Request (Json File):</h1>
+			<code>
+{
+  "initialAmount": {{initialAmount}},
+  "currency": {{currency}},
+  "async": {
+    "successUrl": {{successUrl}},
+    "failureUrl": {{failureUrl}},
+    "cancelUrl": {{cancelUrl}}
+  },
+  "transactionType": {{transactionType}}
+}</code>
+	</div>
+</div>

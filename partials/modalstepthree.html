@@ -1,0 +1,81 @@
+<div class="container">
+  <h1><strong style="color:#DA4405;">Step 3/4:</strong> Make an order request </h1>
+    <a href="/modalsteptwo"><button class="btn btn-info btn-lg">Previous Step</button><a href="/modalstepfour"><button class="btn btn-info">Next Step</button></a>
+    <p>Once you got your base64 encoded "MerchandId:ApiKey" and your json order, we are ready to perform our first order request. Here are some examples: </p><br>
+
+<uib-accordion close-others="true">
+    <div uib-accordion-group class="panel-default" heading="Postman">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>URL</td>
+                    <td>https://apitest.payengine.de/v1/orders</td>
+                </tr>
+                <tr>
+                    <td>HTTP basic authentication header (Step One)</td>
+                    <td><code> Authorization: Basic {{base64}}= </code></td>
+                </tr>
+                <tr>
+                    <td>Body (Step Two)</td>
+                    <td><code>{{order}}</code></td>
+                </tr>
+              </tbody>
+            </table>
+       </div>
+    </div>
+
+    <div uib-accordion-group class="panel-default" heading="CURL">
+        <p>CURL can encode base64, so just pass your merchantId and your Api-Key with the -u Flag: </p>
+        <code>curl -u merchantId:ApiKey --header "Content-Type: application/json" --request POST https://apitest.payengine.de/v1/orders --data '{{order}}' </code>
+    </div>
+
+    <div uib-accordion-group class="panel-default" heading="Javascript (XMLHttpRequest)">
+        <code>var xhr = new XMLHttpRequest();
+var url = "https://apitest.payengine.de/v1/orders"; //Payengine API Orders Endpoint 
+xhr.open("POST", url, true);    //Post request
+xhr.setRequestHeader("Content-Type", "application/json"); //Content-Type: Json
+xhr.setRequestHeader("Authorization","Basic  {{base64}}"); //Authorization in base64
+var data = JSON.stringify({{order}}); //Our Order
+xhr.send(data);</code>
+    </div>
+
+    <h3>Example Response:</h3>
+    <code>
+{
+  "orderId": "string",
+  "initialAmount": 0,
+  "preauthorizedAmount": 0,
+  "capturedAmount": 0,
+  "refundedAmount": 0,
+  "canceledAmount": 0,
+  "currency": "string",
+  "transactions": [
+    {
+      "type": "PREAUTH",
+      "transactionId": "string",
+      "status": "CREATED",
+      "initialAmount": 0,
+      "currency": "string",
+      "description": "string",
+      "createdAt": 0,
+      "modifiedAt": 0,
+      "order": "string",
+      "transactions": [
+        "string"
+      ],
+      "parentTransaction": "string",
+      "descriptor": "string",
+      "capturedAmount": 0,
+      "refundedAmount": 0,
+      "canceledAmount": 0
+    }
+  ],
+  "status": "CREATED",
+  "channel": "ECOM",
+  "createdAt": 0,
+  "modifiedAt": 0
+}</code>
+
+
+</div>

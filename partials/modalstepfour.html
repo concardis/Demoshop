@@ -1,0 +1,30 @@
+<div class="container">
+  <h1><strong style="color:#DA4405;">Step 4/4:</strong> Initialise the Modal</h1>
+    <p>We are now ready to initialise our modal.<br>
+First import the Widget, or download it from <a href="https://pp.payengine.de/widgetjs/payengine.widget.min.js">here</a>.</p>
+<pre>&lt;script src="https://pp.payengine.de/widgetjs/payengine.widget.min.js"&gt;&lt;/script&gt; </pre>
+Secondly we need to create a function for a callback and the Modal itself.
+<pre>
+  &lt;script&gt;
+  //A callback function 
+   var callback = function (error, result) { 
+     if (error) {
+       //There was an error
+       //You will find more details in the error object
+       return;
+     }
+     //Handle transaction successfully created
+   }
+
+   function openModal() {
+     var merchandId = "merchant_kdanvgjnhx";
+     var orderId = "order_564c4d97f7";
+     PayEngineWidget.initAsModal(merchandId, orderId, callback);
+   }
+  &lt;/script&gt;
+</pre>
+
+We can now add a button to open our modal. <br>
+<pre>
+   &lt;button onclick="openModal()"&gt;Open modal&lt;/button&gt;</pre>
+</div>

@@ -1,0 +1,39 @@
+<div class="container"><br>
+    <h1 class="text-center"><strong style="color:#DA4405;">Step 1/4:</strong> Checklist and Configuration <a href="/modalsteptwo"><button class="btn btn-info pull-right">Next Step > </button></a></h1><br>
+    <div class="row">
+        <p>You can initialise the modal in just a few steps. Only your Merchant ID and your API-Key are needed to continue.<br>
+          The merchant id and the Api-Key can be found in the <a href="https://merchanttest.payengine.de/">Payengine Merchant Center</a> under "My Account".<br/>
+          To perform a request a base64 encoded version of "MerchantID:APIKey" is needed. Use your own generator, or change the fields below and use the "generate" button.<br>
+        </p>
+    </div><br>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+             <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Merchant ID</td>
+                    <td><input ng-model="merchandId"></input></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Api-Key</td>
+                    <td><input ng-model="apiKey"></input></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>base64</td>
+                    <td><input ng-model="base64"></input></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-info" ng-click="encode()">generate</button>
+    </div>
+</div>

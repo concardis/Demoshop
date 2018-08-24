@@ -7,13 +7,6 @@
     width: 100%;
 }
 
-.btn-block {
-    color: white !important;
-    background-color : #DA4405 !important;
-}
-
-.btn-block:hover {
-}
 .btn-light:hover, .btn-primary:active, .btn-primary:visited{
     color: #DA4405 !important;
 }
