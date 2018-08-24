@@ -15,6 +15,7 @@ angular.module('StudyCraneApp',[
 
 	$routeProvider
 	.when('/', {templateUrl: 'partials/selectsolution.html', controller:'selectSolutionCtrl'})
+  .when('/modalsexample', {templateUrl: 'partials/modalsexample.html', controller:'modalsExampleCtrl'})
   .when('/modalstepone', {templateUrl: 'partials/modalstepone.html', controller:'modalStepOneCtrl'})
   .when('/modalsteptwo', {templateUrl: 'partials/modalsteptwo.html', controller:'modalStepTwoCtrl'})
   .when('/modalstepthree', {templateUrl: 'partials/modalstepthree.html', controller:'modalStepThreeCtrl'})
@@ -27,18 +28,46 @@ angular.module('StudyCraneApp',[
 	$httpProvider.defaults.useXDomain = true;
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }])
-.controller('modalStepOneCtrl', ['$scope', function($scope) {
-  $scope.merchandId="merchant_kdanvgjnhx";
-  $scope.apiKey="aDxDxDx";
+.factory('apitest', ['$http', function($http) {
+  var apitest = {};
+
+  apitest.setSettings = function(token){
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + token;
+  };
+
+  apitest.getOrders = function(){
+    return $http.get("https://apitest.payengine.de/v1/orders");
+  };
+
+  apitest.getCustomer = function(){
+    return $http.get("https://apitest.payengine.de/v1/customers");
+  };
+  
+  return apitest;
+}])
+.controller('modalStepOneCtrl', ['$rootScope', '$scope','apitest', function($rootScope, $scope, apitest) {
+  $rootScope.merchandId="merchant_xzi4icwblq";
+  $rootScope.apiKey="KQ93UoquBoenSqNQ";
 
   $scope.encode = function(){
-    console.log("encoding");
-    $scope.base64 = btoa($scope.merchandId + ":" + $scope.apiKey);
+    var key =  btoa($rootScope.merchandId + ":" + $rootScope.apiKey);
+    $rootScope.base64 = key;
+    apitest.setSettings($rootScope.base64);
+  };
+
+  $scope.testOrder = function(){
+    apitest.getOrders().then(function successCallback(response) {
+        $scope.response = response;
+        console.log($scope.response);
+      }, function errorCallback(response) {
+        $scope.response = response;
+        console.log($scope.response);
+      });
   };
 
 }])
 .controller('modalStepTwoCtrl', ['$scope', function($scope) {
-  $scope.initialAmount="100";
+  $scope.initialAmount="2";
   $scope.currency="EUR";
   $scope.successUrl="http://demoshop.ocbe.de/success";
   $scope.failureUrl="http://demoshop.ocbe.de/failure";
@@ -47,19 +76,12 @@ angular.module('StudyCraneApp',[
   
 }])
 .controller('modalStepThreeCtrl', ['$scope', function($scope) {
-  $scope.base64 ="bWVyY2hhbnRfa2RhbnZnam5oeDphRHhEeER4";
   $scope.order='{ "initialAmount": 3,"currency": "EUR", "async": { "successUrl": "http://demoshop.ocbe.de/success","failureUrl": "http://demoshop.ocbe.de/failure", "cancelUrl": "http://demoshop.ocbe.de/cancle" }, "transactionType": "PREAUTH" }'
   
 }])
-.controller('selectSolutionCtrl', ['$rootScope', '$scope', '$http','$timeout', function($rootScope, $scope, $http, $timeout) {
-	$scope.select = function(solution){
-		$rootScope.selectedSolution = solution;
-	};
-	$rootScope.site = "home";
-	
-}])
-.controller('mainCtrl', ['$rootScope', '$scope', '$http','$timeout', '$location',  function($rootScope, $scope, $http, $timeout, $location) {
-	$rootScope.site = "home";
+.controller('selectSolutionCtrl', ['$scope',  function($scope) {
 
+}])
+.controller('mainCtrl', ['$scope',  function($scope) {
 
 }])
