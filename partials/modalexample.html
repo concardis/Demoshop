@@ -1,0 +1,85 @@
+<div class="container"><br>
+    <h1 class="text-center"><strong style="color:#DA4405;">Example Shop</strong></h1><br>
+    <div class="row">
+        <div class="card col-md-6">
+            <h3>Rechnungsadresse</h3>
+            <address>
+                <strong>Herr Max Mustermann</strong><br>
+                Helfmann-Park 7<br>
+                65760 Eschborn
+            </address>
+        </div>
+        <div class="card col-md-6">
+            <h3>Versand: Expressversand (0,00€)</h3><br>
+            <h3>Lieferadresse: </h3>Wie Rechnungsadresse
+        </div>
+    </div>
+    <h3>Warenkorb</h3>
+    <div class="table-responsive">
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th>Produkt</th>
+                    <th>Stückpreis</th>
+                    <th>Stück</th>
+                    <th>Zwischensumme</th>
+                </tr>
+            </thead>
+             <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td><img src="img/items/burger.jpg" height="25px"></img></td>
+                    <td>Burger XL</td>
+                    <td>5,00€</td>
+                    <td>2</td>
+                    <td>10,00€</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td><img src="img/items/glass.png" height="25px"></img></td>
+                    <td>Getränk M</td>
+                    <td>2,50€</td>
+                    <td>1</td>
+                    <td>2,50€</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td><img src="img/items/sausage.png" height="25px"></img></td>
+                    <td>Currywurst XL</td>
+                    <td>7,50€</td>
+                    <td>1</td>
+                    <td>7,50€</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><br>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table text-center">
+                <tbody>
+                    <tr><td><input type="checkbox" checked="checked" disabled></input></td>
+                    <td>Ich akzeptiere die allgemeinen Geschäftsbedingungen und die Bestimmungen zum Datenschutz. <br>
+                        Die Informationen zum Widerrufsrecht wurden mir zur Verfügung gestellt.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-striped text-center">
+                <tbody>
+                    <tr>
+                        <td>19% MwSt.</td>
+                        <td>3,80€</td>
+                    </tr>
+                    <tr>
+                        <td><h3>Zu zahlender Betrag:</h3></td>
+                        <td><h3>20,00€</h3></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="btn btn-danger pull-right" ng-click="pay()">Kaufen (Modal Öffnen)</button>
+    <button class="btn btn-info pull-right mrg10R"  disabled><span class="glyphicon icon-linecons-cog"></span> Modal Konfigurieren</button>
+</div>
